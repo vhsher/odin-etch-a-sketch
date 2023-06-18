@@ -4,9 +4,22 @@
   padding: 0;
 }
 
-.sketch {
+.sketchpad {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: flex-start;
   box-sizing: border-box;
   height: 512px;
   width: 512px;
   background-color: gray;
+}
+
+.sketchpixel {
+  background-color: whitesmoke;
+  width: 32px;
+  height: 32px;
+}
+
+.black {
+  background-color: black;
 }
