@@ -4,21 +4,20 @@
   padding: 0;
 }
 
+h1 {
+  padding: 5px;
+  margin: 5px;
+}
+
 .sketchpad {
+  display: flex;
+  flex-flow: wrap;
+  margin: 25px;
   width: 512px;
   height: 512px;
-  display: flex;
-  flex-flow: row wrap;
-  align-content: flex-start;
   background-color: gray;
 }
 
-.sketchpixel {
-  width: 32px;
-  height: 32px;
+.pixel {
   background-color: whitesmoke;
-}
-
-.black {
-  background-color: black;
 }

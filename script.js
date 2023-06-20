@@ -1,50 +1,29 @@
 const sketchpadHTML = document.querySelector('.sketchpad');
 const changeGridHTML = document.querySelector('#change-grid');
 
-changeGridHTML.addEventListener('click', changeSketchPixels);
-
 for (let i = 0; i < 256; i++) {
-  let sketchPixelHTML = document.createElement("div");
-  sketchPixelHTML.classList.add('sketchpixel');
-  sketchpadHTML.appendChild(sketchPixelHTML);
+  const pixelHTML = document.createElement('div');
+  sketchpadHTML.appendChild(pixelHTML);
+  pixelHTML.classList.add('pixel')
+  pixelHTML.style.width = '32px';
+  pixelHTML.style.height = '32px';
 }
 
-function changeSketchPixels() {
+changeGridHTML.addEventListener("click", changeGrid);
 
-  let input = prompt("Enter a value (Example: 16 = 16x16)", 10);
-  let amount = input ** 2;
+function changeGrid() {
+  let amount = prompt("Type 1-100 (Example: 10 = 10x10)", 16);
+  let grid = amount ** 2;
+  let size = 512 / amount;
 
-  document.querySelectorAll('.sketchpixel').forEach(item => {
-    item.remove();
-  })
+  document.querySelectorAll(".pixel").forEach(e => e.remove());
 
-  for (let i = 0; i < amount; i++) {
-    let sketchPixelHTML = document.createElement("div");
-    sketchPixelHTML.classList.add('sketchpixel');
-    sketchpadHTML.appendChild(sketchPixelHTML);
+  for (let i = 0; i < grid; i++) {
+    const pixelHTML = document.createElement('div');
+    sketchpadHTML.appendChild(pixelHTML);
+    pixelHTML.classList.add('pixel')
+    pixelHTML.style.width = `${size}px`;
+    pixelHTML.style.height = `${size}px`;
   }
 
-}
-
-const sketchpadEvents = ['mousedown', 'mouseup', 'mouseleave'];
-sketchpadEvents.forEach(event => {
-
-  sketchpadHTML.addEventListener(event, (e) => {
-
-    if (e.type == "mousedown") {
-      document.querySelectorAll('.sketchpixel').forEach(item => {
-        item.addEventListener('mousemove', turnBlack);
-      });
-    } else {
-      document.querySelectorAll('.sketchpixel').forEach(item => {
-        item.removeEventListener('mousemove', turnBlack);
-      });
-    }
-
-  });
-
-});
-
-function turnBlack(e) {
-  e.target.classList.add("black");
 }
