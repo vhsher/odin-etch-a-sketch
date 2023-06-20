@@ -1,5 +1,5 @@
-const sketchpadHTML = document.querySelector('.sketchpad');
-const changeGridHTML = document.querySelector('#change-grid');
+let sketchpadHTML = document.querySelector('.sketchpad'),
+  changeGridHTML = document.querySelector('#change-grid');
 
 for (let i = 0; i < 256; i++) {
   const pixelHTML = document.createElement('div');
@@ -11,12 +11,13 @@ for (let i = 0; i < 256; i++) {
 
 changeGridHTML.addEventListener("click", changeGrid);
 
-function changeGrid() {
-  let amount = prompt("Type 1-100 (Example: 10 = 10x10)", 16);
+function changeGrid(e) {
+  let amount = e.target.value;
   let grid = amount ** 2;
   let size = 512 / amount;
 
-  document.querySelectorAll(".pixel").forEach(e => e.remove());
+  const pixelsHTML = document.querySelectorAll('.pixel');
+  pixelsHTML.forEach(e => e.remove());
 
   for (let i = 0; i < grid; i++) {
     const pixelHTML = document.createElement('div');
@@ -25,5 +26,27 @@ function changeGrid() {
     pixelHTML.style.width = `${size}px`;
     pixelHTML.style.height = `${size}px`;
   }
+  
+  gridValueHTML.textContent = e.target.value;
+}
 
+let pixelsHTML = document.querySelectorAll('.pixel');
+
+pixelsHTML.forEach(item => {
+  item.addEventListener('click', turnBlack);
+});
+
+function turnBlack(e) {
+  e.target.classList.add('black');
+}
+
+let gridSliderHTML = document.querySelector("#grid-slider");
+let gridValueHTML = document.querySelector("#grid-value");
+
+gridValueHTML.textContent = gridSliderHTML.value;
+
+gridSliderHTML.addEventListener("input", changeGrid);
+
+function updateValue(e) {
+  gridValueHTML.textContent = e.target.value;
 }
