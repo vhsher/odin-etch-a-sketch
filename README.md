@@ -1,6 +1,6 @@
 # Etch-a-Sketch 🎨🖍
 
-This project is part of The Odin Project curriculum.
+This project is part of [The Odin Project](https://theodinproject.com) curriculum.
 
 In this project I practice:
 - Javascript
