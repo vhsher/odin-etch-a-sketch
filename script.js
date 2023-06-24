@@ -1,11 +1,38 @@
 let sketchpadHTML = document.querySelector('.sketchpad');
-let gridSliderHTML = document.querySelector("#grid-slider");
-let gridValueHTML = document.querySelector("#grid-value");
+let changeGridHTML = document.querySelector('#change-grid')
 
-gridSliderHTML.addEventListener("input", changeGrid);
+for (let i = 0; i < 256; i++) {
+  const pixelHTML = document.createElement('div');
+  sketchpadHTML.appendChild(pixelHTML);
+  pixelHTML.classList.add('pixel')
+  pixelHTML.style.width = `${32}px`;
+  pixelHTML.style.height = `${32}px`;
+}
 
-function changeGrid(e) {
-  let amount = e.target.value;
+let mouseDown = false
+document.body.onmousedown = () => (mouseDown = true)
+document.body.onmouseup = () => (mouseDown = false)
+
+let pixelsHTML = document.querySelectorAll('.pixel');
+
+pixelsHTML.forEach(pixel => {
+  pixel.addEventListener('mousedown', turnBlack);
+  pixel.addEventListener('mouseover', turnBlack);
+});
+changeGridHTML.addEventListener('click', changeGrid);
+
+function changeGrid() {
+  let amount = prompt("Select Grid Size: (Min: 1, Max: 100)", 16);
+  if (amount == null) {
+    amount = 16;
+  } else {
+    amount = parseInt(amount, 10);
+  }
+  if (1 <= amount && amount <= 100) {
+  } else {
+    amount = 16;
+  }
+
   let grid = amount ** 2;
   let size = 512 / amount;
 
@@ -22,19 +49,14 @@ function changeGrid(e) {
   
   let pixelsHTML = document.querySelectorAll('.pixel');
 
-  pixelsHTML.forEach(item => {
-    item.addEventListener('click', turnBlack);
+  pixelsHTML.forEach(pixel => {
+    pixel.addEventListener('click', turnBlack);
+    pixel.addEventListener('mouseover', turnBlack);
   });
 
-  gridValueHTML.textContent = e.target.value;
 }
 
 function turnBlack(e) {
+  if (e.type === "mouseover" && !mouseDown) return;
   e.target.classList.add('black');
-}
-
-gridValueHTML.textContent = gridSliderHTML.value;
-
-function updateValue(e) {
-  gridValueHTML.textContent = e.target.value;
 }

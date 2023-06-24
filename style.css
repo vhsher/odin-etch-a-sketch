@@ -4,11 +4,6 @@
   padding: 0;
 }
 
-h1 {
-  padding: 5px;
-  margin: 5px;
-}
-
 .sketchpad {
   display: flex;
   flex-flow: wrap;
