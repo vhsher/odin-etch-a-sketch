@@ -21,8 +21,10 @@ pixelsHTML.forEach(pixel => {
 });
 changeGridHTML.addEventListener('click', changeGrid);
 
+let currentGridSize = 16;
+
 function changeGrid() {
-  let amount = prompt("Select Grid Size: (Min: 1, Max: 100)", 16);
+  let amount = prompt("Select Grid Size: (Min: 1, Max: 100)", currentGridSize);
   if (amount == null) {
     amount = 16;
   } else {
@@ -32,6 +34,7 @@ function changeGrid() {
   } else {
     amount = 16;
   }
+  currentGridSize = amount;
 
   let grid = amount ** 2;
   let size = 512 / amount;
